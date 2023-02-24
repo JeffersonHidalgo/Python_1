@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calculator</title>
+  <style>
+    .calculator {
+      width: 300px;
+      background-color: #eee;
+      padding: 10px;
+    }
+
+    .calculator input {
+      width: 100%;
+      height: 40px;
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
+
+    .calculator button {
+      width: 100%;
+      height: 40px;
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <input type="text" id="result" readonly />
+    <div>
+      <button onclick="addNumber(7)">7</button>
+      <button onclick="addNumber(8)">8</button>
+      <button onclick="addNumber(9)">9</button>
+      <button onclick="addOperation('/')">/</button>
+    </div>
+    <div>
+      <button onclick="addNumber(4)">4</button>
+      <button onclick="addNumber(5)">5</button>
+      <button onclick="addNumber(6)">6</button>
+      <button onclick="addOperation('*')">*</button>
+    </div>
+    <div>
+      <button onclick="addNumber(1)">1</button>
+      <button onclick="addNumber(2)">2</button>
+      <button onclick="addNumber(3)">3</button>
+      <button onclick="addOperation('-')">-</button>
+    </div>
+    <div>
+      <button onclick="addNumber(0)">0</button>
+      <button onclick="addOperation('+')">+</button>
+      <button onclick="calculate()">=</button>
+      <button onclick="clearResult()">C</button>
+    </div>
+  </div>
+  <script>
+    let result = '';
+    let firstNumber = '';
+    let secondNumber = '';
+    let operation = '';
+
+    const addNumber = (number) => {
+      result += number;
+      document.getElementById('result').value = result;
+    }
+
+    const addOperation = (op) => {
+      operation = op;
+      firstNumber = result;
+      result = '';
+    }
+
+    const calculate = () => {
+      secondNumber = result;
+      result = '';
+      let answer;
+      switch (operation) {
+        case '+':
+          answer = parseInt(firstNumber) + parseInt(secondNumber);
+          break;
+        case '-':
+          answer = parseInt(firstNumber) - parseInt(secondNumber);
+          break;
+        case '*':
+          answer = parseInt(firstNumber) * parseInt(secondNumber);
+          break;
+        case '/':
+          answer = parseInt(firstNumber) / parseInt(secondNumber);
+          break;
+      }
+      document.getElementById('result').value = answer;
+    }
+
+    const clearResult = () => {
+      result = '';
+      firstNumber = '';
+      secondNumber = '';
+      operation = '';
+      document.getElementById('result').value = result;
+    }
+  </script>
+</body>
+</html>
